@@ -1,6 +1,6 @@
 ---
 title: "class 06 r function"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
