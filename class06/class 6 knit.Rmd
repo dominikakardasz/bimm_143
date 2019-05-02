@@ -1,0 +1,90 @@
+---
+title: "class 06 r function"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##about 
+this is my **class 6** r markdown document with code and notes 
+
+```{r}
+plot(1:10, typ="l", col="blue")
+```
+
+
+#read the txt files called test 
+
+```{r}
+read.table("test1.txt", header=TRUE, sep=",")
+```
+```{r}
+read.table("test2.txt", header=TRUE, sep="$")
+```
+```{r}
+read.table("test3.txt", header=F, sep="")
+```
+
+#our first silly function example 
+
+```{r}
+add <- function(x, y=1) {
+# Sum the input x and y
+x + y
+}
+```
+```{r}
+add(x=1, y=4)
+
+```
+add(1, 4)
+add(1)
+#that one will give error 
+add( c(1, 2, 3) )
+#?
+add( c(1, 2, 3), 4 )
+add(1, 2, 2)
+add(x=1, y=“b”)
+## You need a “name”, “arguments” and “body”…
+```{r}
+rescale <- function(x) {
+rng <-range(x)
+(x - rng[1]) / (rng[2] - rng[1])
+}
+
+```
+# Test on a small example where you know the answer
+rescale(1:10)
+
+
+```{r}
+rescale(1:10)
+```
+
+#na.rm = true change ot and that was about the range r values argumeht 
+#should then give anwsers 1 and 10
+
+
+```{r}
+
+rescale3 <- function(x, na.rm=TRUE, plot=FALSE) {
+rng <-range(x, na.rm=na.rm)
+print("Hello")
+answer <- (x - rng[1]) / (rng[2] - rng[1])
+print("is it me you are looking for?")
+if(plot) {
+plot(answer, typ="b", lwd=4)
+}
+print("I can see it in ...")
+return(answer)
+}
+
+```
+
+
+
+
+
+
