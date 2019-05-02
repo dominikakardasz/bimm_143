@@ -1,0 +1,197 @@
+---
+title: "class7"
+output: html_document
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#source a file froom last day 
+
+```{r}
+source("http://tinyurl.com/rescale-R")
+```
+
+```{r}
+rescale(1:10)
+```
+
+
+
+#find missing NA values in teo vectors 
+```{r}
+# Lets define an example x and y
+x <- c( 1, 2, NA, 3, NA)
+y <- c(NA, 3, NA, 3, 4)
+```
+
+```{r}
+is.na(x)
+```
+
+```{r}
+is.na(y)
+```
+Try putting these together with an AND
+
+```{r}
+is.na(x) & is.na(y)
+```
+
+
+Take the sum() to ifnd out how many TRUE values we have and thus how many NAs we had in both x and y 
+
+```{r}
+sum( is.na(x)& is.na(y))
+```
+
+Now i can make it into our first function ...
+```{r}
+both_na<- function(x,y){
+  sum( is.na(x) & is.na(y) )
+}
+```
+
+```{r}
+both_na(x, c(NA, 3, NA, 2, NA))
+```
+
+
+Test, test , test
+```{r}
+x <- c(NA, NA, NA)
+y1 <- c( 1, NA, NA)
+y2 <- c( 1, NA, NA, NA)
+```
+
+```{r}
+both_na(x, y2)
+```
+
+```{r}
+y3 <- c(1, NA, NA, NA, NA, NA, NA)
+both_na(x,y3)
+```
+
+Explanation - the forst number is recycles to match the second vector length , so in the case above the NA gets recyced from x value , the one we compare against i guess 
+
+```{r}
+3==3
+```
+```{r}
+3<2
+```
+
+```{r}
+3!=2
+```
+```{r}
+length(x)
+```
+
+```{r}
+length(y2)
+```
+
+Now lets try the both_na2() function on our different ength input vectors 
+```{r}
+both_na(x, y2)
+```
+
+```{r}
+which(c(F,F,T,F,T))
+
+
+#which(is.na(c(1,2, NA,4)))
+```
+```{r}
+x <- c( 1, 2, NA, 3, NA)
+y <- c(NA, 3, NA, 3, 4)
+both_na3(x,y)
+
+```
+#intersect function
+```{r}
+df1
+
+```
+
+```{r}
+df2
+
+```
+
+
+#extracting the ID column- make things simple
+```{r}
+x<-df1$IDs
+y<-df2$IDs
+
+x
+y
+```
+```{r}
+intersect(x, y)
+```
+
+#now i knw that this is the ntersection , but i want it ti output the whole thing with the values from each experimet etc 
+
+```{r}
+which(x %in% y)
+
+```
+
+```{r}
+x[x %in% y]
+
+```
+Use R studio shortcut 'CODE > EXTRACT FUNCTION' to turn our snipett into a working function 
+
+```{r}
+#did this by clicling on the code then >code >extract function 
+gene_intersect <- function(x, y) {
+  cbind( x[x %in% y],
+  y[y %in% x])
+}
+```
+
+```{r}
+gene_intersect(df1$IDs, df2$IDs)
+```
+
+```{r}
+gene_intersect2(df1, df2)
+```
+
+```{r}
+gene_intersect3(df1,df2)
+```
+```{r}
+merge(df1, df2)
+```
+find average grade dropping one worst asignment grade
+```{r}
+#exhercise to determine the average grade dropping lowest score
+
+x <-c(100, 90, 90, 90, 90, 90, 97, 80)
+
+#then find the minimum score 
+ min(x)
+
+#then get rid of min score and calc average 
+(sum(x)-min(x))/(length(x)-1)
+
+grade<-function(x){
+  
+  (sum(x)-min(x))/(length(x)-1)
+}
+ 
+
+```
+
+
+
+
